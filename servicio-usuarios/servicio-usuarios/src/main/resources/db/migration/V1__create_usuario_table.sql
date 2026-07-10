@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS usuario (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100),
+    nombre VARCHAR(100),
+    email VARCHAR(150)
+);

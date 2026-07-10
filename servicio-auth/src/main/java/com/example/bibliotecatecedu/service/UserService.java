@@ -1,0 +1,30 @@
+package com.example.bibliotecatecedu.service;
+
+import com.example.bibliotecatecedu.model.User;
+import com.example.bibliotecatecedu.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public User findByUsername(String username) {
+        return repository.findByUsername(username).orElseThrow();
+    }
+
+    public User findByUsernameOrNull(String username) {
+        return repository.findByUsername(username).orElse(null);
+    }
+
+    public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return repository.save(user);
+    }
+}
